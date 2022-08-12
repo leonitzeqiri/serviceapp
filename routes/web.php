@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,8 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',[ServiceController::class, 'index']);
 
-Route::get('/register', [AuthController::class, 'register']);
+Route::get('/register', [AuthController::class, 'register'])->middleware('guest');
+
+Route::post('/users', [AuthController::class, 'store']);
+
+Route::get('/login', [AuthController::class, 'login'])->name('login')->middleware('guest');
+
+Route::post('/users/authenticate', [AuthController::class, 'authenticate']);
