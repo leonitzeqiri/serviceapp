@@ -24,3 +24,5 @@ Route::post('/users', [AuthController::class, 'store']);
 Route::get('/login', [AuthController::class, 'login']);
 
 Route::post('/users/authenticate', [AuthController::class, 'authenticate']);
+
+Route::post('/logout', [AuthController::class, 'logout']);
