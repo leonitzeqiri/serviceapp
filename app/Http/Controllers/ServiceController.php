@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Service;
 use Illuminate\Http\Request;
+use App\Http\Requests\ServiceRequest;
 
 class ServiceController extends Controller
 {
@@ -13,26 +14,26 @@ class ServiceController extends Controller
         return view('site.services.index', compact('services'));
     }
 
-    public function show()
+
+    public function create()
     {
-
-    }
-
-    public function create() {
+        if( auth()->user()->role != 1) {
+            abort(403, 'Unauthorized Action');
+        }
         return view('site.services.create');
     }
 
-    public function store(Request $request) {
-       $formFields = $request->validate([
-            'title' => 'required',
-        ]);
-        if ($request->hasFile('logo')) {
-            $formFields['logo'] = $request->file('logo')->store('logos', 'public');
+    public function store(ServiceRequest $request)
+    {
+        if( auth()->user()->role != 1) {
+            abort(403, 'Unauthorized Action');
         }
 
-        Service::Create($formFields);
+        $fileName = time() . '_' . $request->logo->getClientOriginalName();
+        $filePath = $request->file('logo')->storeAs('uploads', $fileName, 'public');
 
-        return redirect('/',)->with('message', 'Service Ccreated successfully');
+        Service::create(array_merge($request->validated(), ['logo' => $filePath]));
 
+        return redirect('/')->with('message', 'Service Created successfully');
     }
 }
