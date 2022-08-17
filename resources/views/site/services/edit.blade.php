@@ -2,8 +2,9 @@
 
 @section('content')
 
-    <form method="POST" action="/services" enctype="multipart/form-data">
+    <form method="POST" action="/services/{{ $service->id}}" enctype="multipart/form-data">
         @csrf
+        @method('PUT')
 
         <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
@@ -29,7 +30,7 @@
         <div class="mb-6">
             <div class="flex">
                 <button type="submit"
-                    class="px-24 py-2 mt-4 ml-2 text-white bg-blue-900 rounded-lg hover:bg-red-500">Add</button>
+                    class="px-24 py-2 mt-4 ml-2 text-white bg-blue-900 rounded-lg hover:bg-red-500">Edit</button>
             </div>
             <div class="flex">
             <a href="/" class="px-24 py-2 mt-4 ml-2  text-white bg-red-900 rounded-lg hover:bg-red-500"> Back </a>

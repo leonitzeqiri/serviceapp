@@ -2,25 +2,31 @@
 
 @section('content')
 
-@unless(count($services) == 0)
-    @foreach ($services as $service)
+    @unless(count($services) == 0)
+        @foreach ($services as $service)
+            <main class="bg-brightWhite mx-auto space-y-12 md:py-0 md:flex-row md:space-y-0" style="text-align: center;">
+                <h1 class="max-w-md  text-4xl py-8  font-bold" style="margin-left:20px;">
+                    <a href="/services/{{ $service->id }}">{{ $service->title }}</a>
+                </h1>
 
-    <main class="bg-brightWhite mx-auto space-y-12 md:py-0 md:flex-row md:space-y-0" style="text-align: center;">
-        <h1 class="max-w-md  text-4xl py-8  font-bold" style="margin-left:20px;">
-            {{ $service->title }}
-        </h1>
+                <a class="fa-solid fa-arrow/-right-to-bracket solid font-bold "style="margin-left:83%;" href="/contact"> Build with
+                    US!</a>
 
-        <a class="fa-solid fa-arrow-right-to-bracket solid font-bold "style="margin-left:83%;"  href="/contact"> Build with US!</a>
-
-        <div class="container flex flex-col items-center  md:flex-row md:space-y-0">
-            <div class="mx-8">
-                <img src="{{ asset('storage/' . $service->logo) }}" alt="" />
-            </div>
-        </main>
+                <div class="container flex flex-col items-center  md:flex-row md:space-y-0">
+                    <div class="mx-8">
+                        <img src="{{ asset('storage/' . $service->logo) }}" alt="" />
+                    </div>
+            </main>
         @endforeach
-       @else
-       <p class="bg-brightWhite mx-auto space-y-12 md:py-0 md:flex-row md:space-y-0" style="text-align: center;">No Services</p>
-       @endunless
+    @else
+        <p class="bg-brightWhite mx-auto space-y-12 md:py-0 md:flex-row md:space-y-0" style="text-align: center;">No Services
+        </p>
+    @endunless
+
+    <div class="mt-6 p-4">
+        {{ $services->links() }}
+
+    </div>
 
 
     <section id="cta" class="bg-brightRed">
@@ -51,4 +57,3 @@
     </section>
 
 @endsection
-

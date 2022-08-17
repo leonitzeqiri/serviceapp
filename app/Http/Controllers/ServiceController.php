@@ -10,10 +10,13 @@ class ServiceController extends Controller
 {
     public function index()
     {
-        $services = Service::latest()->get();
+        $services = Service::first()->paginate(1);
         return view('site.services.index', compact('services'));
     }
 
+    public function show(Service $service) {
+        return view('site.services.show', ['service' => $service]);
+    }
 
     public function create()
     {
@@ -36,4 +39,26 @@ class ServiceController extends Controller
 
         return redirect('/')->with('message', 'Service Created successfully');
     }
+
+    public function edit(Service $service) {
+        return view('site.services.edit',['service' => $service]);
+    }
+
+    public function update(ServiceRequest $request, Service $service) {
+
+        $fileName = time() . '_' . $request->logo->getClientOriginalName();
+        $filePath = $request->file('logo')->storeAs('uploads', $fileName, 'public');
+
+        $service->update(array_merge($request->validated(), ['logo' => $filePath]));
+        return redirect('/')->with('message', 'Service Updated successfully');
+    }
+
+    public function destroy(Service $service)
+    {
+
+        $service->delete();
+        return redirect('/')->with('message', 'Service deleted successfully');
+    }
+
+
 }
