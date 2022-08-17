@@ -17,15 +17,11 @@
 
 
 <body>
-    <!-- Navbar -->
     <nav class="relative container mx-auto p-6">
-        <!-- Flex container -->
         <div class="flex items-center justify-between">
-            <!-- Logo -->
             <div class="pt-2">
                 <img src="img/logo.svg" alt="" />
             </div>
-            <!-- Menu Items -->
             <div class="hidden space-x-6 md:flex">
                 <a href="/" class="hover:text-darkGrayishBlue solid font-bold">Home</a>
                 <a href="/about" class="hover:text-darkGrayishBlue solid font-bold">About</a>
