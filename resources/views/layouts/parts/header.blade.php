@@ -19,10 +19,7 @@
 <body>
     <nav class="relative container mx-auto p-6">
         <div class="flex items-center justify-between">
-            <div class="pt-2">
-                <img src="img/logo.svg" alt="" />
-            </div>
-            <div class="hidden space-x-6 md:flex">
+            <div class="hidden space-x-6 ml-4 md:flex">
                 <a href="/" class="hover:text-darkGrayishBlue solid font-bold">Home</a>
                 <a href="/about" class="hover:text-darkGrayishBlue solid font-bold">About</a>
                 <a href="/contact" class="hover:text-darkGrayishBlue solid font-bold">Contact Us</a>
@@ -30,13 +27,13 @@
             </div>
 
             @auth
-                <li>
-                    <span class="font-bold "> Welcome {{ auth()->user()->name }}</span>
+                <li class="" style="margin-left:50%;">
+                    <span class="font-bold" > Welcome {{ auth()->user()->name }}</span>
                 </li>
                 <form class="inline" method="POST" action="/logout">
                     @csrf
-                    <button type="submit">
-                        <i class="fa-solid fa-door-closed"></i> Logout
+                    <button type="submit" class="mr-8">
+                        <i class="fa-solid fa-door-closed "></i> Logout
                     </button>
                 </form>
             @else
