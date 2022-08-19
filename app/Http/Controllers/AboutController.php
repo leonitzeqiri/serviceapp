@@ -16,7 +16,7 @@ class AboutController extends Controller
     }
 
     public function store(Request $request) {
-        $data = $request->validate([
+        $request->validate([
             'title' => 'required',
             'name' => 'required',
             'description' => 'required'
@@ -27,6 +27,6 @@ class AboutController extends Controller
 
         About::create(array_merge($request->validated(), ['logo' => $filePath]));
 
-        return redirect('/site.about.index')->with('message', 'Created Succesfully');
+        return redirect('/site.about')->with('message', 'Created Succesfully');
     }
 }
