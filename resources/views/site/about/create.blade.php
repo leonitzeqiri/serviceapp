@@ -2,7 +2,8 @@
 
 @section('content')
 
-    <form method="POST" action="/services" enctype="multipart/form-data">
+    <form method="POST" action="{{ 'about.store' }}" enctype="multipart/form-data">
+
         @csrf
 
         <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -40,7 +41,7 @@
     </div>
 
     <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-        <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+        <label class="block uppercase tracking-wide     text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
             Description
         </label>
         <input

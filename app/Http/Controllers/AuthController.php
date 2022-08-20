@@ -9,7 +9,7 @@ use Illuminate\Validation\Rule;
 class AuthController extends Controller
 {
     public function register() {
-        return view('users.register');
+        return view('site.users.register');
     }
 
     public function store(Request $request)
@@ -33,7 +33,7 @@ class AuthController extends Controller
     }
 
     public function login() {
-        return view('users.login');
+        return view('site.users.login');
     }
 
     public function authenticate(Request $request) {
