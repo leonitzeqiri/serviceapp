@@ -10,7 +10,7 @@ class AboutController extends Controller
 {
     public function index()
     {
-        $abouts = About::first()->paginate(3);
+        $abouts = About::latest()->paginate(3);
         return view('site.about.index', ['abouts' => $abouts]);
     }
 
