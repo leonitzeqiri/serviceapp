@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\About;
 use Illuminate\Http\Request;
 use App\Http\Requests\AboutRequest;
+use App\Models\Position;
 
 class AboutController extends Controller
 {
@@ -20,6 +21,7 @@ class AboutController extends Controller
 
     public function create()
     {
+        $positions = Position::all();
         return view('site.about.create');
     }
 
