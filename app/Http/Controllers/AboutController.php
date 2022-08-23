@@ -11,8 +11,9 @@ class AboutController extends Controller
 {
     public function index()
     {
+        $positions = Position::all();
         $abouts = About::latest()->paginate(3);
-        return view('site.about.index', ['abouts' => $abouts]);
+        return view('site.about.index', ['abouts' => $abouts], ['positions' => 'positions']);
     }
 
     public function show(About $about) {
