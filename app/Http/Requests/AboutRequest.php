@@ -25,6 +25,7 @@ class AboutRequest extends FormRequest
     {
         return [
             'name' => 'required',
+            'position_id' => 'required',
             'description' => 'required'
         ];
     }
