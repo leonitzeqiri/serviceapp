@@ -10,7 +10,7 @@ class ServiceController extends Controller
 {
     public function index()
     {
-        $services = Service::first()->paginate(1);
+        $services = Service::paginate(1);
         return view('site.services.index', ['services' => $services]);
     }
 
