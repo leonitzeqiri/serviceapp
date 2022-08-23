@@ -9,25 +9,24 @@
                     <a href="/services/{{ $service->id }}">{{ $service->title }}</a>
                 </h1>
 
-                <a class="fa-solid fa-arrow/-right-to-bracket solid font-bold "style="margin-left:83%;" href="/contact"> Build with
-                    US!</a>
+                <a class="fa-solid fa-arrow/-right-to-bracket solid font-bold py-2"style="margin-left:83%;" href="/contact"> Build with
+                    US!
+                </a>
 
-                <div class="container flex flex-col items-center  md:flex-row md:space-y-0">
+                <div class="container flex flex-col w-full h-full py-4  md:flex-row md:space-y-0">
                     <div class="mx-8">
                         <img src="{{ asset('storage/' . $service->logo) }}" alt="" />
                     </div>
-            </main>
-        @endforeach
-    @else
-        <p class="bg-brightWhite mx-auto space-y-12 md:py-0 md:flex-row md:space-y-0" style="text-align: center;">No Services
-        </p>
-    @endunless
+                </main>
+            @endforeach
+            @else
+            <p class="bg-brightWhite mx-auto space-y-12 md:py-0 md:flex-row md:space-y-0" style="text-align: center;">No Services
+            </p>
+            @endunless
 
-    <div class="mt-6 p-4">
-        {{ $services->links() }}
-
-    </div>
-
+            <div class="mt-6 p-4">
+                {{ $services->links() }}
+            </div>
 
     <section id="cta" class="bg-brightRed">
         <div
@@ -51,8 +50,6 @@
                 <img src="images/illustration-intro.svg" alt="" />
             </div>
         </div>
-
-
 
     </section>
 
