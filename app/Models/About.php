@@ -20,7 +20,7 @@ class About extends Model
     {
         if ($filters['search'] ?? false) {
             $query->where('name', 'like', '%' . request('search') . '%')
-            ->orWhere('$position->position', 'like', '%' . request('search') . '%');
+            ->orWhere('position_id', 'like', '%' . request('search') . '%');
         }
     }
 }
