@@ -21,6 +21,9 @@ class AboutController extends Controller
 
     public function create()
     {
+        if( auth()->user()->role != 1) {
+            abort(403, 'Unauthorized Action');
+        }
         $positions = Position::all();
         return view('site.about.create' , compact('positions'));
     }
@@ -38,6 +41,9 @@ class AboutController extends Controller
 
     public function edit(About $about)
     {
+        if( auth()->user()->role != 1) {
+            abort(403, 'Unauthorized Action');
+        }
         return view('site.about.edit',['about' => $about]);
     }
 
@@ -52,6 +58,9 @@ class AboutController extends Controller
     }
 
     public function destroy(About $about) {
+        if( auth()->user()->role != 1) {
+            abort(403, 'Unauthorized Action');
+        }
         $about->delete();
         return view('site.about.index')->with('message', 'About Deleted');
     }
