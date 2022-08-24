@@ -11,7 +11,16 @@ class About extends Model
 
     protected $table = "abouts";
 
-    public function Position() {
+    public function Position()
+    {
         return $this->belongsTo('App\Models\Position', 'position_id', 'id');
+    }
+
+    public function scopeFilter($query, array $filters)
+    {
+        if ($filters['search'] ?? false) {
+            $query->where('name', 'like', '%' . request('search') . '%')
+            ->orWhere('$position->position', 'like', '%' . request('search') . '%');
+        }
     }
 }
