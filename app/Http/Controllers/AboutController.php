@@ -11,7 +11,7 @@ class AboutController extends Controller
 {
     public function index()
     {
-        $abouts = About::latest()->paginate(3);
+        $abouts = About::latest()->filter(request(['search']))->paginate(3);
         return view('site.about.index', ['abouts' => $abouts]);
     }
 
