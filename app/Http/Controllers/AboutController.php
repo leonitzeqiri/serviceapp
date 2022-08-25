@@ -12,12 +12,17 @@ class AboutController extends Controller
 {
     public function index()
     {
+
         try {
             $abouts = About::latest()->filter(request(['search']))->paginate(3);
             return view('site.about.index', ['abouts' => $abouts]);
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
+
+        $abouts = About::latest()->filter(request(['search']))->paginate(3);
+        return view('site.about.index', ['abouts' => $abouts]);
+
     }
 
     public function show(About $about)
@@ -40,6 +45,11 @@ class AboutController extends Controller
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
+        if( auth()->user()->role != 1) {
+            abort(403, 'Unauthorized Action');
+        }
+        $positions = Position::all();
+        return view('site.about.create' , compact('positions'));
     }
 
     public function store(AboutRequest $request)
@@ -67,6 +77,10 @@ class AboutController extends Controller
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
+        if( auth()->user()->role != 1) {
+            abort(403, 'Unauthorized Action');
+        }
+        return view('site.about.edit',['about' => $about]);
     }
 
     public function update(AboutRequest $request, About $about)
@@ -85,6 +99,8 @@ class AboutController extends Controller
     {
         try {
         if (auth()->user()->role != 1) {
+    public function destroy(About $about) {
+        if( auth()->user()->role != 1) {
             abort(403, 'Unauthorized Action');
         }
         $about->delete();
