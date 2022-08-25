@@ -4,20 +4,36 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PositionRequest;
 use App\Models\Position;
-use Illuminate\Http\Request;
+use Exception;
 
 class PositionController extends Controller
 {
-    public function index() {
-        return view('site.positions.index');
+    public function index()
+    {
+        try {
+            return view('site.positions.index');
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
     }
 
-    public function create() {
-        return view('site.positions.create');
+    public function create()
+    {
+        try {
+
+            return view('site.positions.create');
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
     }
 
-    public function store(PositionRequest $request) {
-        Position::create($request->validated());
-        return redirect('/about')->with('message', 'Position Added Succesfully');
+    public function store(PositionRequest $request)
+    {
+        try {
+            Position::create($request->validated());
+            return redirect('/about')->with('message', 'Position Added Succesfully');
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
     }
 }

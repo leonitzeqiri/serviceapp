@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\About;
-use Illuminate\Http\Request;
 use App\Http\Requests\AboutRequest;
 use App\Models\Position;
 use Exception;
@@ -12,6 +11,7 @@ class AboutController extends Controller
 {
     public function index()
     {
+
         try {
             $abouts = About::latest()->filter(request(['search']))->paginate(3);
             return view('site.about.index', ['abouts' => $abouts]);
@@ -84,13 +84,13 @@ class AboutController extends Controller
     public function destroy(About $about)
     {
         try {
-        if (auth()->user()->role != 1) {
-            abort(403, 'Unauthorized Action');
+            if (auth()->user()->role != 1) {
+                abort(403, 'Unauthorized Action');
+            }
+            $about->delete();
+            return view('site.about.index')->with('message', 'About Deleted');
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
         }
-        $about->delete();
-        return view('site.about.index', compact('about'))->with('message', 'About Deleted');
-    }   catch (Exception $e) {
-        throw new Exception($e->getMessage());
     }
-}
 }
