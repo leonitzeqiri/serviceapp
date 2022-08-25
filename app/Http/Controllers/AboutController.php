@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\About;
-use Illuminate\Http\Request;
 use App\Http\Requests\AboutRequest;
 use App\Models\Position;
 use Exception;
@@ -19,10 +18,6 @@ class AboutController extends Controller
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
-
-        $abouts = About::latest()->filter(request(['search']))->paginate(3);
-        return view('site.about.index', ['abouts' => $abouts]);
-
     }
 
     public function show(About $about)
@@ -45,11 +40,6 @@ class AboutController extends Controller
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
-        if( auth()->user()->role != 1) {
-            abort(403, 'Unauthorized Action');
-        }
-        $positions = Position::all();
-        return view('site.about.create' , compact('positions'));
     }
 
     public function store(AboutRequest $request)
@@ -77,10 +67,6 @@ class AboutController extends Controller
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
-        if( auth()->user()->role != 1) {
-            abort(403, 'Unauthorized Action');
-        }
-        return view('site.about.edit',['about' => $about]);
     }
 
     public function update(AboutRequest $request, About $about)
@@ -98,15 +84,13 @@ class AboutController extends Controller
     public function destroy(About $about)
     {
         try {
-        if (auth()->user()->role != 1) {
-    public function destroy(About $about) {
-        if( auth()->user()->role != 1) {
-            abort(403, 'Unauthorized Action');
+            if (auth()->user()->role != 1) {
+                abort(403, 'Unauthorized Action');
+            }
+            $about->delete();
+            return view('site.about.index')->with('message', 'About Deleted');
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
         }
-        $about->delete();
-        return view('site.about.index', compact('about'))->with('message', 'About Deleted');
-    }   catch (Exception $e) {
-        throw new Exception($e->getMessage());
     }
-}
 }
