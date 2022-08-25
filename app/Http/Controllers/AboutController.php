@@ -6,54 +6,91 @@ use App\Models\About;
 use Illuminate\Http\Request;
 use App\Http\Requests\AboutRequest;
 use App\Models\Position;
+use Exception;
 
 class AboutController extends Controller
 {
     public function index()
     {
-        $positions = Position::all();
-        $abouts = About::latest()->paginate(3);
-        return view('site.about.index', ['abouts' => $abouts], ['positions' => 'positions']);
+        try {
+            $abouts = About::latest()->filter(request(['search']))->paginate(3);
+            return view('site.about.index', ['abouts' => $abouts]);
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
     }
 
-    public function show(About $about) {
-        return view('site.about.show' ,['about' => $about]);
+    public function show(About $about)
+    {
+        try {
+            return view('site.about.show', ['about' => $about]);
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
     }
 
     public function create()
     {
-        $positions = Position::all();
-        return view('site.about.create' , compact('positions'));
+        try {
+            if (auth()->user()->role != 1) {
+                abort(403, 'Unauthorized Action');
+            }
+            $positions = Position::all();
+            return view('site.about.create', compact('positions'));
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
     }
 
     public function store(AboutRequest $request)
     {
+        try {
+            $fileName = time() . '_' . $request->logo->getClientOriginalName();
+            $filePath = $request->file('logo')->storeAs('uploads', $fileName, 'public');
 
-        $fileName = time() . '_' . $request->logo->getClientOriginalName();
-        $filePath = $request->file('logo')->storeAs('uploads', $fileName, 'public');
+            About::create(array_merge($request->validated(), ['logo' => $filePath]));
 
-        About::create(array_merge($request->validated(), ['logo' => $filePath]));
-
-        return redirect('/about')->with('message', 'Created Succesfully');
+            return redirect('/about')->with('message', 'Created Succesfully');
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
     }
 
     public function edit(About $about)
     {
-        return view('site.about.edit',['about' => $about]);
+        try {
+            if (auth()->user()->role != 1) {
+                abort(403, 'Unauthorized Action');
+            }
+            $positions = Position::all();
+            return view('site.about.edit', ['about' => $about], ['positions' => $positions]);
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
     }
 
     public function update(AboutRequest $request, About $about)
     {
-
-        $fileName = time() . '_' . $request->logo->getClientOriginalName();
-        $filePath = $request->file('logo')->storeAs('uploads', $fileName, 'public');
-
-        $about->update(array_merge($request->validated(), ['logo' => $filePath]));
-        return view('site.about.index')->with('message', 'About Updated Succesfully');
+        try {
+            $fileName = time() . '_' . $request->logo->getClientOriginalName();
+            $filePath = $request->file('logo')->storeAs('uploads', $fileName, 'public');
+            $about->update(array_merge($request->validated(), ['logo' => $filePath]));
+            return view('site.about.show', compact('about'))->with('message', 'About Updated Succesfully');
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
     }
 
-    public function destroy(About $about) {
+    public function destroy(About $about)
+    {
+        try {
+        if (auth()->user()->role != 1) {
+            abort(403, 'Unauthorized Action');
+        }
         $about->delete();
-        return view('site.about.index')->with('message', 'About Deleted');
+        return view('site.about.index', compact('about'))->with('message', 'About Deleted');
+    }   catch (Exception $e) {
+        throw new Exception($e->getMessage());
     }
+}
 }
