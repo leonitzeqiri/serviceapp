@@ -15,6 +15,7 @@
       </p>
     </div>
 </div>
+
 <form method="POST" action="{{ route('about.destroy', $about->id) }}">
     @csrf
 
