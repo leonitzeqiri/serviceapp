@@ -24,7 +24,7 @@
             </label>
             <input
                 class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                id="grid-first-name" name="name" type="text">
+                id="grid-first-name" name="name" type="text" value="{{ old('name') }}">
             @error('name')
                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
             @enderror
@@ -51,7 +51,7 @@
             </label>
             <input
                 class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                id="grid-first-name" name="description" type="text">
+                id="grid-first-name" name="description" type="text" value="{{ old('description') }}">
             @error('description')
                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
             @enderror
