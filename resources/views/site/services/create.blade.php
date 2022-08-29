@@ -11,7 +11,7 @@
             </label>
             <input
                 class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                id="grid-first-name" name="title" type="text">
+                id="grid-first-name" name="title" type="text" value="{{ old('title') }}">
                 @error('title')
                     <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                 @enderror
@@ -24,7 +24,7 @@
         <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" name="logo" type="file">
         @error('logo')
         <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-    @enderror
+        @enderror
       </div>
         <div class="mb-6">
             <div class="flex">
