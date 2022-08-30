@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\CareersController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\PositionController;
@@ -42,3 +43,4 @@ Route::resource('about', AboutController::class);
 
 Route::resource('contact', ContactController::class);
 Route::resource('position', PositionController::class);
+Route::resource('careers', CareersController::class);
