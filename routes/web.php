@@ -20,16 +20,13 @@ use App\Http\Controllers\PositionController;
 */
 
 
-Route::get('/register', [AuthController::class, 'register'])->middleware('guest');
-
-Route::post('/users', [AuthController::class, 'store']);
-
-Route::get('/login', [AuthController::class, 'login']);
-
-Route::post('/users/authenticate', [AuthController::class, 'authenticate']);
-
-Route::post('/logout', [AuthController::class, 'logout']);
-
+Route::controller(AuthController::class)->group(function () {
+    Route::get('/register', 'register')->middleware('guest');
+    Route::post('/users', 'store');
+    Route::get('/login', 'login');
+    Route::post('/users/authenticate', 'authenticate');
+    Route::post('/logout', 'logout');
+});
 
 Route::get('/', [ServiceController::class, 'index']);
 Route::get('/services/create', [ServiceController::class, 'create']);
@@ -39,8 +36,8 @@ Route::get('/services/{service}/edit', [ServiceController::class, 'edit']);
 Route::put('/services/{service}', [ServiceController::class, 'update']);
 Route::delete('/services/{service}', [ServiceController::class, 'destroy']);
 
-Route::resource('about', AboutController::class);
 
+Route::resource('about', AboutController::class);
 Route::resource('contact', ContactController::class);
 Route::resource('position', PositionController::class);
 Route::resource('careers', CareersController::class);
