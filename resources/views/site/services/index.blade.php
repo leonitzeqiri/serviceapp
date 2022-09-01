@@ -19,6 +19,7 @@
                     </div>
                 </main>
             @endforeach
+        <x-flash-message />
             @else
             <p class="bg-brightWhite mx-auto space-y-12 md:py-0 md:flex-row md:space-y-0" style="text-align: center;">No Services
             </p>
@@ -28,7 +29,8 @@
                 {{ $services->links() }}
             </div>
 
-    <section id="cta" class="bg-brightRed">
+
+            <section id="cta" class="bg-brightRed">
         <div
             class="container flex flex-col items-center justify-between  mx-auto space-y-12 md:py-12 md:flex-row md:space-y-0"style="padding-top:200px">
             <div class="flex flex-col mb-32  ml-8 space-y-12 md:w-1/2">
