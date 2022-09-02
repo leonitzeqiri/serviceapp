@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->string('jobtitle');
             $table->string('description');
-            $table->
             $table->timestamps();
         });
     }
