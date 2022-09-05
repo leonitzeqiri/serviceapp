@@ -19,7 +19,7 @@
                     </div>
                 </main>
             @endforeach
-        <x-flash-message />
+            <x-flash-message />
             @else
             <p class="bg-brightWhite mx-auto space-y-12 md:py-0 md:flex-row md:space-y-0" style="text-align: center;">No Services
             </p>

@@ -11,7 +11,7 @@ class CareersController extends Controller
     public function index()
     {
         try {
-            $careers = Careers::latest();
+            $careers = Careers::all();
             return view('site.careers.index', ['careers' => $careers]);
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
