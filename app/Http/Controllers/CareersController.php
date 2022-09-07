@@ -67,7 +67,7 @@ class CareersController extends Controller
     {
         try {
             $career->update($request->validated());
-            return redirect('/careers', compact('career'))->with('message', 'Jobs has been Updated');
+            return redirect('/careers')->with('message', 'Jobs has been Updated');
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
@@ -80,7 +80,7 @@ class CareersController extends Controller
                 abort(403, 'Unauthorized Action');
             }
             $career->delete();
-            return view('/careers')->with('message', 'Jobs has been Deleted');
+            return redirect('/careers')->with('message', 'Jobs has been Deleted');
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
