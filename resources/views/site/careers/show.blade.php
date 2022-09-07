@@ -5,12 +5,22 @@
         <div class="bg-gray-50 border border-gray-200 rounded mt-4 p-6 pt-8">
             <div class="flex">
                 <div class="flex flex-col items-center p-6 space-y-6 rounded-lg bg-veryLightGray md:flex  md:w-1/3">
-                    <h3 class="text-lg font-bold">{{ $careers->jobtitle }}</h3>
+                    <h3 class="text-lg font-bold">{{ $career->jobtitle }}</h3>
                     <p class="text-sm text-darkGrayishBlue">
-                        {{ $careers->description }}
+                        {{ $career->description }}
                     </p>
                 </div>
             </div>
         </div>
     </div>
+    <form method="POST" action="{{ route('careers.destroy', $career->id) }}">
+    @csrf
+    @method('DELETE')
+    <div class="flex ml-8">
+        <a class="px-24 py-2 mt-4 ml-2 text-white bg-blue-900 rounded-lg hover:bg-red-500" href="{{ route('careers.edit', $career->id) }}">Edit</a>
+        <button type="submit"
+        class="px-24 py-2 mt-4 ml-2 text-white bg-red-900 rounded-lg hover:bg-red-500">Delete</button>
+    </div>
+
+    </form>
     @endsection
