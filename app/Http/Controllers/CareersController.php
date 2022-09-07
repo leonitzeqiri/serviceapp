@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Exception;
 use App\Http\Requests\JobRequest;
+use App\Models\Career;
 use App\Models\Careers;
 use Illuminate\Contracts\Queue\Job;
 
@@ -12,17 +13,17 @@ class CareersController extends Controller
     public function index()
     {
         try {
-            $careers = Careers::all();
-            return view('site.careers.index', ['careers' => $careers]);
+            $career = Career::all();
+            return view('site.careers.index', ['career' => $career]);
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
     }
 
-    public function show(Careers $careers)
+    public function show(Career $career)
     {
         try {
-            return view('site.careers.show', ['careers' => $careers]);
+            return view('site.careers.show', ['career' => $career]);
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
@@ -43,42 +44,42 @@ class CareersController extends Controller
     public function store(JobRequest $request)
     {
         try {
-            Careers::create($request->validated());
+            Career::create($request->validated());
             return redirect('/careers')->with('message', 'Jobs Listing Succesfully');
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
     }
 
-    public function edit(Careers $careers)
+    public function edit(Career $career)
     {
         try {
             if (auth()->user()->role != 1) {
                 abort(403, 'Unauthorized Action');
             }
-            return view('site.careers.edit', ['careers' => $careers]);
+            return view('site.careers.edit', ['career' => $career]);
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
     }
 
-    public function update(JobRequest $request, Careers $careers)
+    public function update(JobRequest $request, Career $career)
     {
         try {
-            $careers->update($request->validated());
-            return redirect('/careers')->with('message', 'Jobs has been Updated');
+            $career->update($request->validated());
+            return redirect('/careers', compact('career'))->with('message', 'Jobs has been Updated');
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
     }
 
-    public function destroy(Careers $careers)
+    public function destroy(Career $career)
     {
         try {
             if (auth()->user()->role != 1) {
                 abort(403, 'Unauthorized Action');
             }
-            $careers->delete();
+            $career->delete();
             return view('/careers')->with('message', 'Jobs has been Deleted');
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
