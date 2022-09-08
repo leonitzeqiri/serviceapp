@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use Exception;
 use App\Http\Requests\JobRequest;
 use App\Models\Career;
-use App\Models\Careers;
-use Illuminate\Contracts\Queue\Job;
 
 class CareersController extends Controller
 {
