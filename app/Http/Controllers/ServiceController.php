@@ -60,5 +60,9 @@ class ServiceController extends Controller
         return redirect('/')->with('message', 'Service deleted successfully');
     }
 
+    public function manage(Service $service) {
+        return view('site.manage', compact('service'));
+    }
+
 
 }
