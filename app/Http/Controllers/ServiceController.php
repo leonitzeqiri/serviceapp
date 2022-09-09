@@ -89,4 +89,10 @@ class ServiceController extends Controller
             throw new Exception($e->getMessage());
         }
     }
+
+
+    public function manage(Service $service) {
+        return view('site.manage', compact('service'));
+    }
+
 }

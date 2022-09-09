@@ -35,6 +35,7 @@ Route::get('/services/{service}', [ServiceController::class, 'show']);
 Route::get('/services/{service}/edit', [ServiceController::class, 'edit']);
 Route::put('/services/{service}', [ServiceController::class, 'update']);
 Route::delete('/services/{service}', [ServiceController::class, 'destroy']);
+Route::get('/manage', [ServiceController::class, 'manage']);
 
 
 Route::resource('about', AboutController::class);
