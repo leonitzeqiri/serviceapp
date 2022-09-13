@@ -20,7 +20,9 @@ class PositionController extends Controller
     public function create()
     {
         try {
-
+            if( auth()->user()->role != 1) {
+                abort(403, 'Unauthorized Action');
+            }
             return view('site.positions.create');
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
