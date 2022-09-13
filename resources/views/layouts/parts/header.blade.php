@@ -46,4 +46,5 @@
                     Login</a>
             @endauth
         </div>
+        <x-flash-message />
     </nav>

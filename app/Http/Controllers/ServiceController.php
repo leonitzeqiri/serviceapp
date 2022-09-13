@@ -28,9 +28,6 @@ class ServiceController extends Controller
 
     public function store(ServiceRequest $request)
     {
-        if( auth()->user()->role != 1) {
-            abort(403, 'Unauthorized Action');
-        }
 
         $fileName = time() . '_' . $request->logo->getClientOriginalName();
         $filePath = $request->file('logo')->storeAs('uploads', $fileName, 'public');
@@ -41,11 +38,13 @@ class ServiceController extends Controller
     }
 
     public function edit(Service $service) {
+        if( auth()->user()->role != 1) {
+            abort(403, 'Unauthorized Action');
+        }
         return view('site.services.edit',['service' => $service]);
     }
 
     public function update(ServiceRequest $request, Service $service) {
-
         $fileName = time() . '_' . $request->logo->getClientOriginalName();
         $filePath = $request->file('logo')->storeAs('uploads', $fileName, 'public');
 
@@ -55,7 +54,9 @@ class ServiceController extends Controller
 
     public function destroy(Service $service)
     {
-
+        if( auth()->user()->role != 1) {
+            abort(403, 'Unauthorized Action');
+        }
         $service->delete();
         return redirect('/')->with('message', 'Service deleted successfully');
     }
