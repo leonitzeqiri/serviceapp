@@ -24,15 +24,14 @@
             </label>
             <input
                 class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                id="grid-first-name" name="name" type="text">
+                id="grid-first-name" name="name" type="text" value="{{ old('name') }}">
             @error('name')
                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
             @enderror
         </div>
-
         <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label class="block uppercase tracking-wide     text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
-               Position
+                Position
             </label>
             <select
                 class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
@@ -52,11 +51,12 @@
             </label>
             <input
                 class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-                id="grid-first-name" name="description" type="text">
+                id="grid-first-name" name="description" type="text" value="{{ old('description') }}">
             @error('description')
                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
             @enderror
         </div>
+
         <div class="mb-6">
             <div class="flex">
                 <button type="submit"

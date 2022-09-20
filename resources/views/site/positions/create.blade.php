@@ -10,7 +10,7 @@
     </label>
     <input
         class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-        id="grid-first-name" name="position" type="text">
+        id="grid-first-name" name="position" type="text" value="{{ old('position') }}">
         @error('name')
             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
         @enderror
