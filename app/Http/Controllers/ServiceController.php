@@ -5,18 +5,23 @@ namespace App\Http\Controllers;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use App\Http\Requests\ServiceRequest;
+use App\Models\Collaborate;
+
 use Exception;
+
 
 class ServiceController extends Controller
 {
     public function index()
-    {
-        try {
-            $services = Service::paginate(1);
-            return view('site.services.index', ['services' => $services]);
+    {   
+         try {
+        $collaborate = Collaborate::all();
+        $services = Service::paginate(1);
+        return view('site.services.index', ['services' => $services], ['collaborate' => $collaborate]);
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
+
     }
 
     public function show(Service $service)
