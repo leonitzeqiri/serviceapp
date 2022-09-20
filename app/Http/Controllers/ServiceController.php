@@ -5,13 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use App\Http\Requests\ServiceRequest;
+use App\Models\Collaborate;
 
 class ServiceController extends Controller
 {
     public function index()
     {
+        $collaborate = Collaborate::all();
         $services = Service::paginate(1);
-        return view('site.services.index', ['services' => $services]);
+        return view('site.services.index', ['services' => $services], ['collaborate' => $collaborate]);
     }
 
     public function show(Service $service) {
