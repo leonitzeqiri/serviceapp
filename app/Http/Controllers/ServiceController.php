@@ -14,7 +14,7 @@ class ServiceController extends Controller
         try {
             $collaborate = Collaborate::paginate(1);
             $services = Service::paginate(1);
-            return view('site.services.index', ['services' => $services], ['collaborate' => $collaborate]);
+            return view('site.services.index', compact('services' ,'collaborate'));
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
@@ -23,7 +23,7 @@ class ServiceController extends Controller
     public function show(Service $service)
     {
         try {
-            return view('site.services.show', ['service' => $service]);
+            return view('site.services.show', compact('service'));
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
@@ -61,7 +61,7 @@ class ServiceController extends Controller
             if (auth()->user()->role != 1) {
                 abort(403, 'Unauthorized Action');
             }
-            return view('site.services.edit', ['service' => $service]);
+            return view('site.services.edit', compact('service'));
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
