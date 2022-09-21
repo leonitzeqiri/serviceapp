@@ -7,6 +7,9 @@ use App\Http\Requests\ServiceRequest;
 use App\Models\Collaborate;
 use Exception;
 
+use Exception;
+
+
 class ServiceController extends Controller
 {
     public function index()
@@ -18,6 +21,7 @@ class ServiceController extends Controller
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
+
     }
 
     public function show(Service $service)
@@ -65,8 +69,7 @@ class ServiceController extends Controller
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
-    }
-
+}
     public function update(ServiceRequest $request, Service $service)
     {
         try {
@@ -78,6 +81,7 @@ class ServiceController extends Controller
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
+
     }
 
     public function destroy(Service $service)
@@ -101,4 +105,5 @@ class ServiceController extends Controller
             throw new Exception($e->getMessage());
         }
     }
+
 }
