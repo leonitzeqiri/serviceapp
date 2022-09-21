@@ -9,14 +9,42 @@ use Exception;
 class CollaborateController extends Controller
 {
 
-    public function create() {
+    public function create()
+    {
+        if (auth()->user()->role != 1) {
+            abort(403, 'Unauthorized Action');
+        }
         return view('site.collaborate.create');
     }
 
-    public function store(CollaborateRequest $request) {
+    public function store(CollaborateRequest $request)
+    {
         try {
-        Collaborate::create($request->validated());
-        return redirect('/')->with('message', 'Collaborate has been created successfully');
+            $fileName = time() . '_' . $request->image->getClientOriginalName();
+            $filePath = $request->file('image')->storeAs('uploads', $fileName, 'public');
+            Collaborate::create(array_merge($request->validated(), ['image' => $filePath]));
+            return redirect('/')->with('message', 'Collaborate has been created successfully');
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
+
+    public function edit(Collaborate $collaborate)
+    {
+        if (auth()->user()->role != 1) {
+            abort(403, 'Unauthorized Action');
+        }
+
+        return view('site.collaborate.edit', array('collaborate' => $collaborate));
+    }
+
+    public function update(CollaborateRequest $request, Collaborate $collaborate)
+    {
+        try {
+            $fileName = time() . '_' . $request->image->getClientOriginalName();
+            $filePath = $request->file('image')->storeAs('uploads', $fileName, 'public');
+            $collaborate->update(array_merge($request->validated(), ['image' => $filePath]));
+            return redirect('/')->with('message', 'Collaborate Updated successfully');
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
