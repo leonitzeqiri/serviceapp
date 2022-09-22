@@ -17,6 +17,15 @@ class CollaborateController extends Controller
         return view('site.collaborate.create');
     }
 
+    public function show(Collaborate $collaborate)
+    {
+        try {
+            return view('site.collaborate.show', ['collaborate' => $collaborate]);
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
+
     public function store(CollaborateRequest $request)
     {
         try {
@@ -45,6 +54,19 @@ class CollaborateController extends Controller
             $filePath = $request->file('image')->storeAs('uploads', $fileName, 'public');
             $collaborate->update(array_merge($request->validated(), ['image' => $filePath]));
             return redirect('/')->with('message', 'Collaborate Updated successfully');
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
+    }
+
+    public function destroy(Collaborate $collaborate)
+    {
+        try {
+            if (auth()->user()->role != 1) {
+                abort(403, 'Unauthorized Action');
+            }
+            $collaborate->delete();
+            return redirect('/')->with('message', 'Collaborate has been Deleted');
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
