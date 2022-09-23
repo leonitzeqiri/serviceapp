@@ -23,7 +23,7 @@ class AboutController extends Controller
     public function show(About $about)
     {
         try {
-            return view('site.about.show', ['about' => $about]);
+            return view('site.about.show', compact('about'));
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
@@ -63,7 +63,7 @@ class AboutController extends Controller
                 abort(403, 'Unauthorized Action');
             }
             $positions = Position::all();
-            return view('site.about.edit', ['about' => $about], ['positions' => $positions]);
+            return view('site.about.edit',compact('positions', 'about'));
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }

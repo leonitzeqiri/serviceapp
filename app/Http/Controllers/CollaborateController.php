@@ -20,7 +20,7 @@ class CollaborateController extends Controller
     public function show(Collaborate $collaborate)
     {
         try {
-            return view('site.collaborate.show', ['collaborate' => $collaborate]);
+            return view('site.collaborate.show', compact('collaborate'));
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
@@ -43,8 +43,7 @@ class CollaborateController extends Controller
         if (auth()->user()->role != 1) {
             abort(403, 'Unauthorized Action');
         }
-
-        return view('site.collaborate.edit', array('collaborate' => $collaborate));
+        return view('site.collaborate.edit',  compact('collaborate'));
     }
 
     public function update(CollaborateRequest $request, Collaborate $collaborate)

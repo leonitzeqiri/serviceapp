@@ -12,7 +12,7 @@ class CareersController extends Controller
     {
         try {
             $career = Career::all();
-            return view('site.careers.index', ['career' => $career]);
+            return view('site.careers.index', compact('career'));
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
@@ -21,7 +21,7 @@ class CareersController extends Controller
     public function show(Career $career)
     {
         try {
-            return view('site.careers.show', ['career' => $career]);
+            return view('site.careers.show', compact('career'));
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
@@ -55,7 +55,7 @@ class CareersController extends Controller
             if (auth()->user()->role != 1) {
                 abort(403, 'Unauthorized Action');
             }
-            return view('site.careers.edit', ['career' => $career]);
+            return view('site.careers.edit', compact('career'));
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
