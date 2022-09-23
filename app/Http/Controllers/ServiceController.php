@@ -96,7 +96,8 @@ class ServiceController extends Controller
     public function manage(Service $service)
     {
         try {
-            return view('site.manage', compact('service'));
+            $services = Service::all();
+            return view('site.manage', compact('services'));
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
