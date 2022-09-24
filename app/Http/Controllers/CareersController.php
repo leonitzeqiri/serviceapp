@@ -21,6 +21,9 @@ class CareersController extends Controller
     public function show(Career $career)
     {
         try {
+            if (auth()->user()->role != 1) {
+                abort(403, 'Unauthorized Action');
+            }
             return view('site.careers.show', compact('career'));
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
