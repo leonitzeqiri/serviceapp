@@ -23,6 +23,9 @@ class AboutController extends Controller
     public function show(About $about)
     {
         try {
+            if (auth()->user()->role != 1) {
+                abort(403, 'Unauthorized Action');
+            }
             return view('site.about.show', compact('about'));
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
