@@ -24,7 +24,7 @@ use App\Http\Controllers\CollaborateController;
 Route::controller(AuthController::class)->group(function () {
     Route::get('/register', 'register')->middleware('guest');
     Route::post('/users', 'store');
-    Route::get('/login', 'login');
+    Route::get('/login', 'login')->middleware('guest');
     Route::post('/users/authenticate', 'authenticate');
     Route::post('/logout', 'logout');
 });
