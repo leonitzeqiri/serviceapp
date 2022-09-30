@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Service;
-use App\Http\Requests\ServiceRequest;
-use App\Models\Collaborate;
 use Exception;
+use App\Models\About;
+use App\Models\Service;
+use App\Models\Collaborate;
+use App\Http\Requests\ServiceRequest;
 
 class ServiceController extends Controller
 {
@@ -99,8 +100,12 @@ class ServiceController extends Controller
     public function manage(Service $service)
     {
         try {
+            if (auth()->user()->role != 1) {
+                abort(403, 'Unauthorized Action');
+            }
             $services = Service::all();
-            return view('site.manage', compact('services'));
+            $abouts = About::all();
+            return view('site.manage', compact('services','abouts'));
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
