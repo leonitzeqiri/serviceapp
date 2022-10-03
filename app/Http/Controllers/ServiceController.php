@@ -109,7 +109,8 @@ class ServiceController extends Controller
             }
             $services = Service::all();
             $abouts = About::all();
-            return view('site.manage', compact('services','abouts'));
+            $collaborate = Collaborate::all();
+            return view('site.manage', compact('services','abouts', 'collaborate'));
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
