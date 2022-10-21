@@ -30,6 +30,11 @@
                 <li class="" style="margin-left:50%;">
                     <span class="font-bold" > Welcome {{ auth()->user()->name }}</span>
                 </li>
+
+                <li>
+                    <a href="/manage" class="hover:text-laravel"><i class="fa-solid fa-gear"></i> Manage Listings</a>
+                </li>
+                <br><br>
                 <form class="inline" method="POST" action="/logout">
                     @csrf
                     <button type="submit" class="mr-8">
