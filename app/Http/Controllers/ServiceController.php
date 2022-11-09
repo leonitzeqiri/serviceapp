@@ -24,9 +24,7 @@ class ServiceController extends Controller
     public function show(Service $service)
     {
         try {
-            if (auth()->user()->role != 1) {
-                abort(403, 'Unauthorized Action');
-            }
+
             return view('site.services.show', compact('service'));
         } catch (Exception $e) {
             throw new Exception($e->getMessage());

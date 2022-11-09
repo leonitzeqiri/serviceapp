@@ -68,7 +68,7 @@ class CollaborateController extends Controller
                 abort(403, 'Unauthorized Action');
             }
             $collaborate->delete();
-            return redirect('/')->with('message', 'Collaborate has been Deleted');
+            return redirect('/manage')->with('message', 'Collaborate has been Deleted');
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
